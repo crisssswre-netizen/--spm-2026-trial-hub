@@ -1,0 +1,787 @@
+index.html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SPM 2026 Trial Hub</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                     "PingFang SC", "Microsoft YaHei", sans-serif;
+        background: #f6f5f2;
+        color: #30302f;
+        min-height: 100vh;
+    }
+
+    header {
+        background: rgba(255,255,255,0.94);
+        border-bottom: 1px solid #e7e3dc;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(12px);
+    }
+
+    .nav {
+        max-width: 1180px;
+        margin: auto;
+        height: 72px;
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo {
+        font-size: 21px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
+
+    .logo span {
+        font-weight: 400;
+        color: #77736d;
+    }
+
+    .nav-right {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    button {
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+    }
+
+    .lang-btn {
+        background: #efede8;
+        color: #4f4c47;
+        padding: 9px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+    }
+
+    .hero {
+        max-width: 1180px;
+        margin: auto;
+        padding: 72px 24px 42px;
+    }
+
+    .hero-small {
+        color: #8a857d;
+        font-size: 13px;
+        letter-spacing: 1.5px;
+        margin-bottom: 14px;
+        text-transform: uppercase;
+    }
+
+    .hero h1 {
+        font-size: clamp(38px, 6vw, 68px);
+        line-height: 1.05;
+        letter-spacing: -2.5px;
+        max-width: 760px;
+        margin-bottom: 20px;
+    }
+
+    .hero p {
+        color: #77736d;
+        font-size: 16px;
+        line-height: 1.8;
+        max-width: 650px;
+    }
+
+    .search-area {
+        max-width: 1180px;
+        margin: 0 auto 30px;
+        padding: 0 24px;
+    }
+
+    .search-box {
+        background: white;
+        border: 1px solid #e5e1da;
+        border-radius: 16px;
+        padding: 5px;
+        display: flex;
+        box-shadow: 0 8px 30px rgba(60,55,45,0.04);
+    }
+
+    .search-box input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 14px 16px;
+        font-size: 15px;
+        background: transparent;
+        color: #333;
+        font-family: inherit;
+    }
+
+    .search-btn {
+        background: #33322f;
+        color: white;
+        padding: 0 22px;
+        border-radius: 12px;
+        font-size: 14px;
+    }
+
+    .content {
+        max-width: 1180px;
+        margin: auto;
+        padding: 0 24px 80px;
+    }
+
+    .section-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 38px 0 18px;
+    }
+
+    .section-title h2 {
+        font-size: 23px;
+        letter-spacing: -0.5px;
+    }
+
+    .section-title span {
+        font-size: 13px;
+        color: #99948c;
+    }
+
+    .subjects {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+    }
+
+    .subject {
+        border: 1px solid #e5e1da;
+        border-radius: 16px;
+        padding: 20px;
+        background: white;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .subject:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(50,45,35,0.07);
+    }
+
+    .subject-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+        background: #efede8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+        font-size: 17px;
+    }
+
+    .subject h3 {
+        font-size: 16px;
+        margin-bottom: 6px;
+    }
+
+    .subject p {
+        color: #99948c;
+        font-size: 12px;
+    }
+
+    .papers {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .paper {
+        background: white;
+        border: 1px solid #e5e1da;
+        border-radius: 16px;
+        padding: 21px;
+        transition: 0.2s;
+    }
+
+    .paper:hover {
+        box-shadow: 0 10px 25px rgba(50,45,35,0.06);
+    }
+
+    .paper-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+
+    .tag {
+        background: #f0eee9;
+        color: #716d66;
+        padding: 6px 9px;
+        border-radius: 7px;
+        font-size: 11px;
+    }
+
+    .paper h3 {
+        font-size: 17px;
+        margin-bottom: 7px;
+    }
+
+    .paper p {
+        color: #99948c;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .open-btn {
+        margin-top: 17px;
+        width: 100%;
+        padding: 11px;
+        border-radius: 9px;
+        background: #f0eee9;
+        color: #44413d;
+        font-size: 13px;
+        transition: 0.2s;
+    }
+
+    .open-btn:hover {
+        background: #dedbd4;
+    }
+
+    .notice {
+        margin-top: 30px;
+        background: #eeece7;
+        border-radius: 16px;
+        padding: 20px;
+        color: #716d66;
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+    footer {
+        border-top: 1px solid #e4e0d9;
+        padding: 28px 24px;
+        text-align: center;
+        color: #99948c;
+        font-size: 12px;
+    }
+
+    .empty {
+        text-align: center;
+        padding: 50px 20px;
+        color: #99948c;
+        display: none;
+    }
+
+    @media (max-width: 850px) {
+        .subjects {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .papers {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 560px) {
+        .nav {
+            height: 64px;
+        }
+
+        .logo {
+            font-size: 17px;
+        }
+
+        .hero {
+            padding-top: 50px;
+        }
+
+        .hero h1 {
+            letter-spacing: -1.5px;
+        }
+
+        .subjects,
+        .papers {
+            grid-template-columns: 1fr;
+        }
+
+        .search-box {
+            flex-direction: column;
+            gap: 5px;
+            padding: 5px;
+        }
+
+        .search-btn {
+            padding: 12px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="nav">
+        <div class="logo">
+            SPM 2026 <span>Trial Hub</span>
+        </div>
+
+        <div class="nav-right">
+            <button class="lang-btn" onclick="toggleLanguage()" id="langButton">
+                EN / 中文
+            </button>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-small" id="heroSmall">
+        MALAYSIA · SPM 2026
+    </div>
+
+    <h1 id="heroTitle">
+        Your Trial Papers,<br>
+        All in One Place.
+    </h1>
+
+    <p id="heroText">
+        A simple collection hub for SPM 2026 trial examination papers.
+        Find papers by subject and access them quickly.
+    </p>
+</section>
+
+<section class="search-area">
+    <div class="search-box">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search subject, paper or school..."
+            oninput="searchPapers()"
+        >
+
+        <button class="search-btn" onclick="searchPapers()" id="searchButton">
+            Search
+        </button>
+    </div>
+</section>
+
+<main class="content">
+
+    <div class="section-title">
+        <h2 id="subjectTitle">Subjects</h2>
+        <span id="subjectCount">8 Subjects</span>
+    </div>
+
+    <div class="subjects">
+
+        <div class="subject" onclick="filterSubject('BM')">
+            <div class="subject-icon">BM</div>
+            <h3>Bahasa Melayu</h3>
+            <p>Bahasa Melayu</p>
+        </div>
+
+        <div class="subject" onclick="filterSubject('English')">
+            <div class="subject-icon">EN</div>
+            <h3>English</h3>
+            <p>English Language</p>
+        </div>
+
+        <div class="subject" onclick="filterSubject('Chinese')">
+            <div class="subject-icon">文</div>
+            <h3>华文</h3>
+            <p>Chinese Language</p>
+        </div>
+
+        <div class="subject" onclick="filterSubject('Mathematics')">
+            <div class="subject-icon">∑</div>
+            <h3>Mathematics</h3>
+            <p>Mathematics</p>
+        </div>
+
+        <div class="subject" onclick="filterSubject('Additional Mathematics')">
+            <div class="subject-icon">∫</div>
+            <h3>Additional Mathematics</h3>
+            <p>Additional Mathematics</p>
+        </div>
+
+        <div class="subject" onclick="filterSubject('Physics')">
+            <div class="subject-icon">Φ</div>
+            <h3>Physics</h3>
+            <p>Physics</p>
+        </div>
+
+        <div class="subject" onclick="filterSubject('Chemistry')">
+            <div class="subject-icon">⚗</div>
+            <h3>Chemistry</h3>
+            <p>Chemistry</p>
+        </div>
+
+        <div class="subject" onclick="filterSubject('Biology')">
+            <div class="subject-icon">DNA</div>
+            <h3>Biology</h3>
+            <p>Biology</p>
+        </div>
+
+    </div>
+
+    <div class="section-title">
+        <h2 id="paperTitle">Trial Papers</h2>
+        <span id="paperCount">Latest collection</span>
+    </div>
+
+    <div class="papers" id="paperList">
+
+        <div class="paper" data-subject="English">
+            <div class="paper-top">
+                <span class="tag">2026</span>
+                <span class="tag">English</span>
+            </div>
+
+            <h3>SPM English Trial Paper</h3>
+
+            <p>
+                2026 Trial Examination<br>
+                Paper 1 & Paper 2
+            </p>
+
+            <button class="open-btn" onclick="openPaper('#')">
+                Open Paper
+            </button>
+        </div>
+
+
+        <div class="paper" data-subject="BM">
+            <div class="paper-top">
+                <span class="tag">2026</span>
+                <span class="tag">BM</span>
+            </div>
+
+            <h3>SPM Bahasa Melayu Trial</h3>
+
+            <p>
+                2026 Trial Examination<br>
+                Kertas 1 & Kertas 2
+            </p>
+
+            <button class="open-btn" onclick="openPaper('#')">
+                Open Paper
+            </button>
+        </div>
+
+
+        <div class="paper" data-subject="Chinese">
+            <div class="paper-top">
+                <span class="tag">2026</span>
+                <span class="tag">华文</span>
+            </div>
+
+            <h3>SPM 华文试卷</h3>
+
+            <p>
+                2026 Trial Examination<br>
+                试卷资料
+            </p>
+
+            <button class="open-btn" onclick="openPaper('#')">
+                Open Paper
+            </button>
+        </div>
+
+
+        <div class="paper" data-subject="Mathematics">
+            <div class="paper-top">
+                <span class="tag">2026</span>
+                <span class="tag">Math</span>
+            </div>
+
+            <h3>SPM Mathematics Trial</h3>
+
+            <p>
+                2026 Trial Examination<br>
+                Paper 1 & Paper 2
+            </p>
+
+            <button class="open-btn" onclick="openPaper('#')">
+                Open Paper
+            </button>
+        </div>
+
+
+        <div class="paper" data-subject="Additional Mathematics">
+            <div class="paper-top">
+                <span class="tag">2026</span>
+                <span class="tag">Add Maths</span>
+            </div>
+
+            <h3>Additional Mathematics Trial</h3>
+
+            <p>
+                2026 Trial Examination<br>
+                Paper 1 & Paper 2
+            </p>
+
+            <button class="open-btn" onclick="openPaper('#')">
+                Open Paper
+            </button>
+        </div>
+
+
+        <div class="paper" data-subject="Physics">
+            <div class="paper-top">
+                <span class="tag">2026</span>
+                <span class="tag">Physics</span>
+            </div>
+
+            <h3>SPM Physics Trial Paper</h3>
+
+            <p>
+                2026 Trial Examination<br>
+                Paper 1 & Paper 2
+            </p>
+
+            <button class="open-btn" onclick="openPaper('#')">
+                Open Paper
+            </button>
+        </div>
+
+
+        <div class="paper" data-subject="Chemistry">
+            <div class="paper-top">
+                <span class="tag">2026</span>
+                <span class="tag">Chemistry</span>
+            </div>
+
+            <h3>SPM Chemistry Trial Paper</h3>
+
+            <p>
+                2026 Trial Examination<br>
+                Paper 1 & Paper 2
+            </p>
+
+            <button class="open-btn" onclick="openPaper('#')">
+                Open Paper
+            </button>
+        </div>
+
+
+        <div class="paper" data-subject="Biology">
+            <div class="paper-top">
+                <span class="tag">2026</span>
+                <span class="tag">Biology</span>
+            </div>
+
+            <h3>SPM Biology Trial Paper</h3>
+
+            <p>
+                2026 Trial Examination<br>
+                Paper 1 & Paper 2
+            </p>
+
+            <button class="open-btn" onclick="openPaper('#')">
+                Open Paper
+            </button>
+        </div>
+
+    </div>
+
+    <div class="empty" id="emptyMessage">
+        No papers found.
+    </div>
+
+    <div class="notice" id="notice">
+        <strong>Note</strong><br>
+        Trial papers will be added gradually. This website is an independent
+        collection hub and is not affiliated with the Malaysian Examinations Syndicate.
+    </div>
+
+</main>
+
+<footer>
+    SPM 2026 Trial Hub · Made for students
+</footer>
+
+
+<script>
+
+let chinese = false;
+
+function toggleLanguage() {
+
+    chinese = !chinese;
+
+    if (chinese) {
+
+        document.getElementById("heroSmall").innerText =
+            "马来西亚 · SPM 2026";
+
+        document.getElementById("heroTitle").innerHTML =
+            "SPM 2026<br>Trial Paper Hub";
+
+        document.getElementById("heroText").innerText =
+            "集中整理 SPM 2026 Trial 试卷，让你更方便按照科目寻找和复习试卷。";
+
+        document.getElementById("subjectTitle").innerText =
+            "科目";
+
+        document.getElementById("subjectCount").innerText =
+            "8 个科目";
+
+        document.getElementById("paperTitle").innerText =
+            "Trial 试卷";
+
+        document.getElementById("paperCount").innerText =
+            "试卷收藏";
+
+        document.getElementById("searchInput").placeholder =
+            "搜索科目、试卷或学校...";
+
+        document.getElementById("searchButton").innerText =
+            "搜索";
+
+        document.getElementById("notice").innerHTML =
+            "<strong>注意</strong><br>" +
+            "Trial 试卷将会陆续加入。本网站为独立整理平台，与马来西亚考试局没有官方关联。";
+
+        document.querySelectorAll(".open-btn").forEach(btn => {
+            btn.innerText = "打开试卷";
+        });
+
+    } else {
+
+        document.getElementById("heroSmall").innerText =
+            "MALAYSIA · SPM 2026";
+
+        document.getElementById("heroTitle").innerHTML =
+            "Your Trial Papers,<br>All in One Place.";
+
+        document.getElementById("heroText").innerText =
+            "A simple collection hub for SPM 2026 trial examination papers. Find papers by subject and access them quickly.";
+
+        document.getElementById("subjectTitle").innerText =
+            "Subjects";
+
+        document.getElementById("subjectCount").innerText =
+            "8 Subjects";
+
+        document.getElementById("paperTitle").innerText =
+            "Trial Papers";
+
+        document.getElementById("paperCount").innerText =
+            "Latest collection";
+
+        document.getElementById("searchInput").placeholder =
+            "Search subject, paper or school...";
+
+        document.getElementById("searchButton").innerText =
+            "Search";
+
+        document.getElementById("notice").innerHTML =
+            "<strong>Note</strong><br>" +
+            "Trial papers will be added gradually. This website is an independent collection hub and is not affiliated with the Malaysian Examinations Syndicate.";
+
+        document.querySelectorAll(".open-btn").forEach(btn => {
+            btn.innerText = "Open Paper";
+        });
+    }
+}
+
+
+function searchPapers() {
+
+    const keyword =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const papers =
+        document.querySelectorAll(".paper");
+
+    let found = 0;
+
+    papers.forEach(paper => {
+
+        const text =
+            paper.innerText.toLowerCase();
+
+        if (text.includes(keyword)) {
+
+            paper.style.display = "";
+
+            found++;
+
+        } else {
+
+            paper.style.display = "none";
+        }
+    });
+
+    document.getElementById("emptyMessage").style.display =
+        found === 0 ? "block" : "none";
+}
+
+
+function filterSubject(subject) {
+
+    const papers =
+        document.querySelectorAll(".paper");
+
+    let found = 0;
+
+    papers.forEach(paper => {
+
+        const paperSubject =
+            paper.getAttribute("data-subject");
+
+        if (paperSubject === subject) {
+
+            paper.style.display = "";
+
+            found++;
+
+        } else {
+
+            paper.style.display = "none";
+        }
+    });
+
+    document.getElementById("emptyMessage").style.display =
+        found === 0 ? "block" : "none";
+
+    document.getElementById("paperTitle").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+
+function openPaper(link) {
+
+    if (link === "#") {
+
+        alert(
+            chinese
+            ? "这份试卷的 PDF 还没有上传。之后可以把真实 PDF 链接放在这里。"
+            : "The PDF for this paper has not been uploaded yet. A real PDF link can be added here later."
+        );
+
+        return;
+    }
+
+    window.open(link, "_blank");
+}
+
+</script>
+
+</body>
+</html>
